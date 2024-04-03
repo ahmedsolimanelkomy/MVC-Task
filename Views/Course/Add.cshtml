@@ -1,0 +1,29 @@
+﻿@using Day_2.ViewModels
+@model CourseDepartmentInstructorViewModel
+@{
+    SelectList Departments = new SelectList(Model.Departments, "ID","Name");
+}
+
+<form method="post" asp-action="DataSaved" class="form">
+    <label class="form-label" asp-for="Course.Name"></label>
+    <input asp-for="Course.Name" class="form-control form-text"/><br /><br />
+    <span asp-validation-for="Course.Name" class="text-danger"></span><br />
+
+    <label class="form-label" asp-for="Course.Degree"></label>
+    <input asp-for="Course.Degree" class="form-control" /><br /><br />
+    <span asp-validation-for="Course.Degree" class="text-danger"></span><br />
+
+    <label class="form-label" asp-for="Course.MinDegree"></label>
+    <input asp-for="Course.MinDegree" class="form-control" /><br /><br />
+    <span asp-validation-for="Course.MinDegree" class="text-danger"></span><br />
+
+    <label class="form-label" asp-for="Course.Hours"></label>
+    <input asp-for="Course.Hours" class="form-control" /><br />
+    <span asp-validation-for="Course.Hours" class="text-danger"></span><br /><br />
+    <select asp-items="Departments" class="form-control form-select" asp-for="Course.DeptID">
+        <option ></option>
+    </select><br />
+    <input type="submit" value="Save" class="btn btn-success" />
+</form>
+
+<partial name="_ValidationScriptsPartial" />

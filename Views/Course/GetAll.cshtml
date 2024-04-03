@@ -1,0 +1,62 @@
+﻿@model ICollection<Course>
+<link href="styles.css" rel="stylesheet" />
+<form action="@Url.Action("GetAll", "Course")" method="get" class="search-form">
+    <div class="input-group">
+        <input type="text" name="searchQuery" placeholder="Search..." class="form-control" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form><br />
+<a asp-action="Add" class="btn btn-primary">Add</a><br /><br />
+<table class="table table-bordered table-active">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Hours</td>
+        <td>Degree</td>
+        <td>Min Degree</td>
+        <td>Department</td>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Hours</td>
+            <td>@item.Degree</td>
+            <td>@item.MinDegree</td>
+            <td>@item?.Department?.Name</td>
+        </tr>
+    }
+</table>
+
+<div class="pagination">
+    @if (ViewBag.TotalPages > 1)
+    {
+        @Html.ActionLink("First", "GetAll", new { page = 1 })
+        @if (ViewBag.PageNumber > 1)
+        {
+            @Html.ActionLink("Previous", "GetAll", new { page = ViewBag.PageNumber - 1 })
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.PageNumber)
+            {
+                <strong>@i</strong>
+            }
+            else
+            {
+                @Html.ActionLink(i.ToString(), "GetAll", new { page = i })
+            }
+        }
+
+        @if (ViewBag.PageNumber < ViewBag.TotalPages)
+        {
+            @Html.ActionLink("Next", "GetAll", new { page = ViewBag.PageNumber + 1 })
+        }
+        @Html.ActionLink("Last", "GetAll", new { page = ViewBag.TotalPages })
+    }
+</div>
+

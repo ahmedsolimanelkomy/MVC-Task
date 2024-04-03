@@ -1,0 +1,50 @@
+﻿@using Day_2.ViewModels
+@model InstructorEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_MyLayout";
+}
+<partial name="_NavPartialLayout"></partial>
+<form class="form form-control" asp-controller="Instructor" asp-action="DataEdited">
+    <input name="ID" value="@Model?.Instructor?.ID" hidden />
+    <label class="form-check-label">Name</label>
+    <input name="Name" type="text" class="text-black-50" required value="@Model.Instructor?.Name"/><br /><br />
+    <label class="form-check-label">Address</label>
+    <input name="Address" type="text" class="text-black-50" required value="@Model.Instructor?.Address"/><br /><br />
+    <label class="form-check-label">Salary</label>
+    <input name="Salary" type="text" class="text-black-50" required value="@Model.Instructor?.Salary" /><br /><br />
+    <label class="form-check-label">ImageURL</label>
+    <input name="ImageURL" type="text" class="text-black-50" required value="@Model.Instructor?.ImageURL" /><br /><br />
+    <select name="DeptID" required>
+        @foreach (var item in Model.Departments)
+        {
+            if (@item?.ID == Model.Instructor?.DeptID)
+            {
+                <option value="@item?.ID" selected>
+                    @item?.Name
+                </option>
+            }
+            else
+            {
+                <option value="@item?.ID">@item?.Name</option>
+            }
+        }
+    </select><br /><br />
+    <select name="CourseID" required>
+        @foreach (var item in Model.Courses)
+        {
+            if (@item?.ID == Model.Instructor?.CourseID)
+            {
+                <option value="@item?.ID" selected>
+                    @item.Name
+                </option>
+            }
+            else
+            {
+                <option value="@item?.ID">@item?.Name</option>
+            }
+        }
+    </select><br /><br />
+    <input type="submit" class="btn btn-success" value="Update" />
+
+</form>

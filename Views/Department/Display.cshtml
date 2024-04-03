@@ -1,0 +1,33 @@
+﻿@model List<Department>
+
+<select id="DeptID" onchange="load()" >
+    @foreach(var item in Model)
+    {
+        <option value="@item.ID" selected >@item.Name</option>
+    }
+</select>
+    <table class="table table-bordered table-primary">
+    <tr id="t1">
+        
+    </tr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script>
+        function load(){
+            $("#t1").html("");
+            var deptID = $("#DeptID").val();
+            console.log(deptID);
+            $.ajax({
+                url: "/Department/DisplayCrs?id=" + deptID,
+                success: function (result) {
+                    console.log(result);
+                    for (let item of result) {
+                        console.log(item);
+                        //$("#div1").append("<li>" + item.name + "</li>");
+                        $("#t1").append("<tr><td>" + item.name + "</td></tr>");
+                    }
+                }
+            });
+        }
+</script>

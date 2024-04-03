@@ -1,0 +1,23 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_MyLayout";
+}
+<partial name="_NavPartialLayout"></partial>
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>@Model.ID</td>
+            <td>@Model.Name</td>
+            <td>@Model.Address</td>
+            <td>@Model.Salary</td>
+            <td><img src="/Images/@Model.ImageURL" alt="No Image" style="width: 100px;" /></td>
+            <td class="btn-link">@Html.ActionLink("Back", "GetAll", "Instructor")</td>
+        </tr>
+    </table>
+}
+else
+{
+    <p>No data available for the instructor.</p>
+}

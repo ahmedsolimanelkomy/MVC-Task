@@ -1,0 +1,24 @@
+﻿@model List<Instructor> 
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "_MyLayout";
+}
+<partial name="_NavPartialLayout"></partial>
+<a asp-action="Add" class="btn btn-secondary">Add</a><br /><br />
+<table class="table table-bordered table-light">
+    
+        @foreach (var item in Model)
+    {
+        <tr class="table-row">
+            <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Address</td>
+                    <td>@item.Salary</td>
+                    <td><img src="/Images/@item.ImageURL" alt="NO IMages"  style="width :100px"/></td>
+                    <td>@item.IsDeleted</td>
+                    <td class="btn btn-info"><a asp-action="Delete" asp-route-id ="@item.ID" style="text-decoration:none">Delete</a></td>
+                    <td class="btn btn-info"><a asp-action="Edit" asp-route-id="@item.ID" style="text-decoration:none">Edit</a></td>
+            <td class="btn btn-info">@Html.ActionLink("Details", "Details", "Instructor", new { ID = @item.ID }, new { @class = "btn btn-info", style = "color: white;" })</td>
+            </tr> }
+</table>
+

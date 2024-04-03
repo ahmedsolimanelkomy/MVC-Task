@@ -1,0 +1,31 @@
+﻿@using Day_2.Controllers
+@model DepartmentsandCourses
+@{
+    ViewData["Title"] = "Add";
+    Layout = "_MyLayout";
+}
+<partial name="_NavPartialLayout"></partial>
+<form class="form form-control" action="/Instructor/DataSaved">
+    <label class="form-check-label">Name</label>
+    <input name="Name" type="text" class="text-black-50" required/><br /><br />
+    <label class="form-check-label">Address</label>
+    <input name="Address" type="text" class="text-black-50" required /><br /><br />
+    <label class="form-check-label">Salary</label>
+    <input name="Salary" type="text" class="text-black-50" required /><br /><br />
+    <label class="form-check-label">ImageURL</label>
+    <input name="ImageURL" type="text" class="text-black-50" required /><br /><br />
+    <select name="DeptID" required>
+        @foreach (var item in Model.Departments)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select><br /><br />
+    <select name="CourseID" required>
+        @foreach (var item in Model.Courses)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select><br /><br />
+    <input type="submit" class="btn btn-success" />
+
+</form>
